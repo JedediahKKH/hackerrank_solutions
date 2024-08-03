@@ -1,0 +1,78 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.function.*;
+import java.util.regex.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
+
+class Result {
+
+    /*
+     * Complete the 'timeConversion' function below.
+     *
+     * The function is expected to return a STRING.
+     * The function accepts STRING s as parameter.
+     */
+
+    public static String timeConversion(String s) {
+    // Write your code here
+        // Check if AM or PM
+        if(s.contains("AM")&&!s.isEmpty()){
+            System.out.println("Entered if clause");
+            Integer intObj=new Integer(Integer.valueOf(s.substring(0,2)));
+            int hour;
+            if(intObj.intValue()==12){
+                hour=0;
+                StringBuilder convertedTime=new StringBuilder();
+                convertedTime.append(hour);
+                convertedTime.append(hour);
+                convertedTime.append(s.substring(2,8));
+                System.out.println(convertedTime);
+                return convertedTime.toString();    
+            }else{
+                return s.substring(0,8);
+            }
+            
+            
+        }else{
+            //System.out.println("Entered else clause");
+            // it is PM, at 12 to the HH and remove PM
+            Integer intObj=new Integer(Integer.valueOf(s.substring(0,2)));            
+            int hour=0;
+            if(intObj.intValue()<12){
+                hour= intObj.intValue()+12;    
+            }else if(intObj.intValue()==12){
+                hour= intObj.intValue();
+            }
+            
+            
+            StringBuilder convertedTime=new StringBuilder();
+            convertedTime.append(hour);
+            convertedTime.append(s.substring(2,8));
+            return convertedTime.toString();
+        }
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String s = bufferedReader.readLine();
+
+        String result = Result.timeConversion(s);
+
+        bufferedWriter.write(result);
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
