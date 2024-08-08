@@ -1,0 +1,57 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.function.*;
+import java.util.regex.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
+
+class Result {
+
+    /*
+     * Complete the 'pageCount' function below.
+     *
+     * The function is expected to return an INTEGER.
+     * The function accepts following parameters:
+     *  1. INTEGER n
+     *  2. INTEGER p
+     */
+
+    public static int pageCount(int n, int p) {
+    // Write your code here
+        // num of turns from front is basically p/2 (integer division)
+        // num of turns from back n/2 - num of turns from front?
+        // return the min of these 2 values
+        
+        List<Integer> numOfTurns= new ArrayList<Integer>();
+        int numOfTurnsFront= p/2;
+        int numOfTurnsBack= (n/2)-numOfTurnsFront;
+        numOfTurns.add(numOfTurnsFront);
+        numOfTurns.add(numOfTurnsBack);
+        return Collections.min(numOfTurns);
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int n = Integer.parseInt(bufferedReader.readLine().trim());
+
+        int p = Integer.parseInt(bufferedReader.readLine().trim());
+
+        int result = Result.pageCount(n, p);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
